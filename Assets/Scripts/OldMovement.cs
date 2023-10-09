@@ -22,7 +22,7 @@ public class OldMovement : MonoBehaviour
     private float turn;
     private float drift;
     private bool isDrifting = false;
-    private bool isPausing = false;
+    private float _pause = 1.0f;
 
     public Rigidbody oldCarRb;
 
@@ -107,12 +107,17 @@ public class OldMovement : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        isPausing = context.ReadValue<bool>();
-
-        if(isPausing == true)
+        _pause = context.ReadValue<float>();
+        if (_pause == 1)
         {
             //GamesManager.Instance == PauseState;
+            ScenesManager.Instance.LoadPause();
             Debug.Log("Game Paused");
+        }
+        if(_pause == 0)
+        {
+            ScenesManager.Instance.UnPause();
+            Debug.Log("Game Resumed");
         }
     }
 

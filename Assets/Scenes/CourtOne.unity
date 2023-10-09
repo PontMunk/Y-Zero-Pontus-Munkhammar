@@ -652,7 +652,7 @@ Transform:
   m_GameObject: {fileID: 443770098}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 107.46757, y: 178.74426, z: 31.881653}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2123,7 +2123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0519477bb3ae61941b3c2b84eb947b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerOne: {fileID: 0}
+  scenesManager: {fileID: 0}
+  PlayerOne: {fileID: 1425327862}
+  Play: {fileID: 0}
+  Resume: {fileID: 0}
+  QuitGame: {fileID: 0}
 --- !u!4 &1315146591 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8285830911016275747, guid: d857e819b93e256479582a9f627b7ad1, type: 3}
@@ -3512,7 +3516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2126231334
 MonoBehaviour:
   m_ObjectHideFlags: 0

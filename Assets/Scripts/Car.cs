@@ -6,20 +6,19 @@ using UnityEngine.SceneManagement;
 public class Car : MonoBehaviour
 {
     public static ScenesManager Scene;
-    public static Car Instance;
+    public static Car Instance;     //Why this?
 
 
 
-    [SerializeField] OldMovement movementBehaviour;
-    [SerializeField] private InputAction turnAction;
+    [SerializeField] OldMovement movementBehaviour;     //Sebastians suggestion to stearing, not needed!?
+    [SerializeField] private InputAction turnAction;    //-||-
 
-    
 
     public Rigidbody carRb;
     public BoxCollider FinishLine;
     private int checkpoint;
     private int lap = 0;
-    private float speed = 10f;
+    private float speed = 10f;      //Not needed in this script? If I can get the "current speed" from the movement script, I can manipulate this here
     private float boost = 2f;
     private float trackDrag = 0f;
     private float grassDrag = 2f;
@@ -31,35 +30,32 @@ public class Car : MonoBehaviour
         FinishLine = GetComponent<BoxCollider>();
     }
 
-    private void Update()
+    private void Update()       //Needed?
     {
         //Debug.Log(speed); //Speedcheck
     }
 
     public void StartRebinding()
     {
-        turnAction.PerformInteractiveRebinding();
+        turnAction.PerformInteractiveRebinding();       //For Reversed?? cansleout
     }
 
     void OnTriggerEnter(Collider trigger)
     {
         if(trigger.gameObject.tag == "Grass")
         {
-            Debug.Log("Entered Grass");
             carRb.drag = grassDrag;     //I'm I really usin physics? YES! But not friction/a physics material
+            Debug.Log("Entered Grass");
         }
-
         if (trigger.gameObject.tag == "Boost")
         {
             carRb.AddForce(transform.forward * boost, ForceMode.Impulse);
             Debug.Log("Entered Boost");
         }
-
         if (trigger.gameObject.tag == "Reversed")
         {
             // Inwoke the reversed stearing a=d & -> = <-
             //Ribinding in runtime https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/ActionBindings.html#runtime-rebinding
-            
             
             /*
             public InputActionReference triggerAction;
@@ -73,7 +69,8 @@ public class Car : MonoBehaviour
             Debug.Log("Entered Reversed");
         }
 
-        //Checkpoints   //I konw that there is a much more efficient way to do this, this makes it easy for me.
+        //Checkpoints   //I konw that there should be a more efficient way to do this, this makes it easy for me for now.
+        //Can I write this in a loop? And get rid of the hard values?
         if(trigger.gameObject.tag == "Checkpoint")
         {
             if(checkpoint == 0)
@@ -104,14 +101,14 @@ public class Car : MonoBehaviour
         {
             //call GamesManager, score/time, next court
             //onClick "Continue" -> LoadNextScene();
-            ScenesManager.Instance.LoadScene(ScenesManager.Scene.CourtTwo);
+            ScenesManager.Instance.LoadNextScene();
             Debug.Log("Goal!");
         }
         else if (trigger.gameObject.tag == "FinishLine" && checkpoint == 3)
         {
             lap++;
             checkpoint = 0;
-            Debug.Log("Lap: " + lap);
+            Debug.Log("Lap: " + lap);       //Would like to have this displayed on ingame UI. In best case attached to each player.
         }
 
         /*
@@ -131,16 +128,17 @@ public class Car : MonoBehaviour
     {
         if(trigger.gameObject.tag == "Grass")
         {
-            carRb.drag = trackDrag;//Remove the slowdown effect/ status normal
-            Debug.Log("exited Grass");
+            carRb.drag = trackDrag;     //Removes the slowdown effect/ status normal
+            Debug.Log("Exited Grass");
         }
         if(trigger.gameObject.tag == "Boost")
         {
-            //Take away the increased speed     //Really needed?
+            //Take away the increased speed     //In this state of the game, not really needed.
         }
         if(trigger.gameObject.tag == "Reversed")
         {
             //Revert the turn back
+            Debug.Log("Exited Reversed");
         }
     }
 
@@ -149,10 +147,11 @@ public class Car : MonoBehaviour
         if(collision.gameObject.name == "Wall")
         {
             //Redirect, reflect the rotation ... or something
-            //Debug.Log("hit wall");
         }
         if (collision.gameObject.tag == "Car")
         {
+            //This is where the "bump-into-car-effect" should go, right?
+            
             //carRb.GetComponent<Transform>().position = carRb.AddForce(transform.position * carBumbForce);
             //carRb.AddForce(-transform.position * speed * carBumbForce); //do I need to disable the "move forward function"?
             //carRb.AddForce(-Vector3.up * carBumbForce, ForceMode.Impulse);

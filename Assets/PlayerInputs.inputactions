@@ -34,11 +34,11 @@
                 },
                 {
                     "name": "Pause",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "2509ce45-0d6b-4f86-b6b8-7cf6070b52eb",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
