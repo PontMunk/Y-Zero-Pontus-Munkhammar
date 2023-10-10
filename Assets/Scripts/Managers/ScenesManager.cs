@@ -7,29 +7,23 @@ using UnityEngine.UI;
 
 public class ScenesManager : MonoBehaviour
 {
-    [SerializeField] GameObject _uiManager;
+    [SerializeField] GameObject uiManager;         //Don't even need this right? Why do I need the SM attached to ScenesManager object?
     
-
-    public static ScenesManager Instance;
-    public static UIManager uIManager;
-    public static OldMovement oldmovement;
-    public CanvasAttribute canvasPause;
-
-    private bool isPaused = false;
+    public static ScenesManager _scenesManager;
+    public static UIManager _uIManager;
 
     private void Awake()
     {
-        Instance = this;
-        Time.timeScale = 1f;        //Must be set to 1f in the instance where the game starts, after every button selection
-        
+        _scenesManager = this;
     }
-
-    private void Start()
+    
+    /*      What should I destroy when the game ain't running/on QuitGema button?
+    private void OnDestroy()
     {
-        
+        if (SceneManager.sceneCountInBuildSettings == 4);
     }
-
-    public enum Scene       //Creates scenes too call?? Has to do with the BuildIndex?
+    */
+    public enum Scene       //Creates a hierarchy to load from the BuildIndex...?
     {
         CourtOne,
         CourtTwo,
@@ -38,19 +32,21 @@ public class ScenesManager : MonoBehaviour
 
     public void LoadScene(Scene scene)
     {
-        SceneManager.LoadScene(scene.ToString());       //what does this method do?
+        SceneManager.LoadScene(scene.ToString());       //what does this method even do?
     }
 
     public void LoadNewGame()
     {
         SceneManager.LoadScene(Scene.CourtOne.ToString());
-        //ref to MainMenu/Playerselect & stop gametime
-        uIManager.PlayerSelectOne();
-        Time.timeScale = 0f;
+        //call OnDestroy?
+        _uIManager.Awake();
+        //Time.timeScale = 0f;        //This is done in the UIM, get rid of?
     }
 
     public void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
+        //Access the GameUI once more to get it working in the next scene
     }
 }

@@ -11,7 +11,8 @@ public class OldMovement : MonoBehaviour
     //[SerializeField] InputAction moveAction;  Sebastians suggestion, where you'll have to bind each key
     //[SerializeField] InputAction turnAction;
 
-    public static GamesManager _gamesManager;
+    
+    public static UIManager _uiManager;
 
     private float speed = 10f;
     private float turnSpeed = 0.5f;
@@ -29,9 +30,9 @@ public class OldMovement : MonoBehaviour
     void Start()
     {
         oldCarRb = GetComponent<Rigidbody>();
+        _uiManager = FindAnyObjectByType<UIManager>();      //To find UIManager
     }
 
-    
     void FixedUpdate()
     {
         Thrust(thrust * Time.fixedDeltaTime); // is this neccessary?
@@ -106,26 +107,14 @@ public class OldMovement : MonoBehaviour
     }
 
     public void Pause(InputAction.CallbackContext context)      //https://www.youtube.com/watch?v=9dYDBomQpBQ tip on pausemenu
-    {
-        _pause = context.ReadValue<float>();
+    {                                                           /* This Mehmet helped me fix by NOt checkinf for the 0 value, 
+                                                                 * and by resuming the pause in the same way that the UI buttons work
+                                                                 * TODO: When pausing and resuming more than once, the resumebutton don't reset as it should */
+        _pause = context.ReadValue<float>();                    
         if (_pause == 1)
         {
-            //GamesManager.Instance == PauseState;
-            //ScenesManager.Instance.LoadPause();
+            _uiManager.PauseMenu();
             Debug.Log("Game Paused");
         }
-        if(_pause == 0)
-        {
-            //ScenesManager.Instance.UnPause();
-            Debug.Log("Game Resumed");
-        }
-
-
-        /* Can I work around this problem?
-         * press 1 to pause
-         * if on pause -> use Mouse.current.leftButton.wasReleasedThisFrame -> to quit maybe? and 1 again to unpause
-         */
-
     }
-
 }
