@@ -13,9 +13,10 @@ public class Car : MonoBehaviour
     [SerializeField] OldMovement movementBehaviour;     //Sebastians suggestion to stearing, not needed!?
     [SerializeField] private InputAction turnAction;    //-||-
 
-
     public Rigidbody carRb;
     public BoxCollider FinishLine;
+    
+
     private int checkpoint;
     private int lap = 0;
     private float speed = 10f;      //Not needed in this script? If I can get the "current speed" from the movement script, I can manipulate this here

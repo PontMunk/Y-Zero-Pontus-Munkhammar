@@ -11,7 +11,7 @@ public class OldMovement : MonoBehaviour
     //[SerializeField] InputAction moveAction;  Sebastians suggestion, where you'll have to bind each key
     //[SerializeField] InputAction turnAction;
 
-    public static GamesManager Instance;
+    public static GamesManager _gamesManager;
 
     private float speed = 10f;
     private float turnSpeed = 0.5f;
@@ -64,7 +64,7 @@ public class OldMovement : MonoBehaviour
     public void OnTurn(InputAction.CallbackContext context)
     {
         turn = context.ReadValue<float>();
-        //Debug.Log(m_turn);
+        //Debug.Log(turn);
     }
 
     public void Turn(float m_turn)
@@ -90,7 +90,7 @@ public class OldMovement : MonoBehaviour
         }
     }
 
-    public void Drift(InputAction.CallbackContext context)      //To check wether the Drift button is pressed or not
+    public void Drift(InputAction.CallbackContext context)      //To check weather the Drift button is pressed or not
     {
         drift = context.ReadValue<float>();
         
@@ -105,20 +105,27 @@ public class OldMovement : MonoBehaviour
         //Debug.Log(isDrifting);
     }
 
-    public void Pause(InputAction.CallbackContext context)
+    public void Pause(InputAction.CallbackContext context)      //https://www.youtube.com/watch?v=9dYDBomQpBQ tip on pausemenu
     {
         _pause = context.ReadValue<float>();
         if (_pause == 1)
         {
             //GamesManager.Instance == PauseState;
-            ScenesManager.Instance.LoadPause();
+            //ScenesManager.Instance.LoadPause();
             Debug.Log("Game Paused");
         }
         if(_pause == 0)
         {
-            ScenesManager.Instance.UnPause();
+            //ScenesManager.Instance.UnPause();
             Debug.Log("Game Resumed");
         }
+
+
+        /* Can I work around this problem?
+         * press 1 to pause
+         * if on pause -> use Mouse.current.leftButton.wasReleasedThisFrame -> to quit maybe? and 1 again to unpause
+         */
+
     }
 
 }
