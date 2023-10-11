@@ -29,6 +29,7 @@ Scene to Load, to play the game.
   Assets -> Scenes -> CourtOne
     Play the Scene from here, and you'll be given which keys to use
     AND! With some recognition of race games and going clockwise, you'll manage to drive around the course, finish four laps and get to the next scene x3.
+UI -> every parent should be disabled at the start.
 
 In Menu's: 
 Use Mouse.
