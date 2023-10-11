@@ -43,13 +43,16 @@ Sources.
 Sebastian's lectures:
      * https://drive.google.com/drive/folders/1GIJ_NlDb0qeycuae4NYkukvQoJ4yciKO
 
+Unity Input System Example:
+Included in the project. Samples -> Input System -> Simple Demo -> SimpleController_UsingPlayerInput
+
+Unity Manual:
+     * https://docs.unity3d.com/ScriptReference/Transform.html
+
 Influential videos to get the movement and input working:
      * https://www.youtube.com/watch?v=m5WsmlEOFiA
      * https://www.youtube.com/watch?v=ZHOWqF-b51k
      * https://www.youtube.com/watch?v=BSybcKPQCnc
-
-Unity Manual:
-     * https://docs.unity3d.com/ScriptReference/Transform.html
 
 Dani Krossing's YouTube tutorial:
      * https://www.youtube.com/watch?v=jrPTpD2eAMw
