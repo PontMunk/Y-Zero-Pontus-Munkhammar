@@ -34,9 +34,9 @@ public class UIManager : MonoBehaviour
         ToMovementMenu();
     }
 
-    public void MainMenu()
+    public void MainMenu()      //On LoadNextScene and LoadNewGame Null ref here! Get it fixed! I need to keep the Car and The UI when goin into the next scene
     {
-        _canvasMainMenu.SetActive(true);
+       _canvasMainMenu.SetActive(true);
     }
 
     public void ToMovementMenu()            //TODO: Include a "back and forth-button"

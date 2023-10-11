@@ -74,10 +74,11 @@ public class Car : MonoBehaviour
             ScenesManager.scenesManager.LoadNextScene();
             Debug.Log("Goal!");
         }
-        else if (trigger.gameObject.tag == "FinishLine" && checkpoint == 3)     /*TODO, edit onto UIscript instead! This is where Magnus helped me with this quickfix
-                                                                                 * Would like to have this displayed on ingame UI. In best case attached to each player.
-                                                                                 */
-        {
+        /*TODO, edit onto UIscript instead! This is where Magnus helped me with this quickfix
+         * Would like to have this displayed on ingame UI. In best case attached to each player. */
+        
+        else if (trigger.gameObject.tag == "FinishLine" && checkpoint == 3)
+        { 
             lap++;
             lapText.text = "Lap: " + lap.ToString() + "/4";        
             checkpoint = 0;                                        
