@@ -14,6 +14,7 @@ This was also why I starved for the moving back and forth in a straight line, as
 
 
 I've reviewed my assignment below. Read if interested. Made it for me to acknowledge what went wrong, what to improve etc. It doesn't contain all my thoughts, but some general.
+Also I don't like to polish a turd, so this is where I criticize my assignment.
 
 Instructions in Unity:
 
