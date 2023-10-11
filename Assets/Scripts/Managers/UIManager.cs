@@ -1,17 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.UI;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class UIManager : MonoBehaviour
 {
-    //Multiplayeroptions is outcommented, TODO! - Enable instantioation of a second player etc.
-
+    //Multiplayeroptions keept in Unity, TODO! - Enable instantioation of a second player etc.
     [SerializeField] GameObject _canvasMainMenu;
     [SerializeField] GameObject _buttonPlayersOne;
 
@@ -21,15 +12,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject _canvasGameUI;
 
     [SerializeField] GameObject _canvasPause;
-    [SerializeField] GameObject Resume;
-    [SerializeField] GameObject QuitGame;
+    [SerializeField] GameObject _resume;
+    [SerializeField] GameObject _quitGame;
 
-    public static ScenesManager scenesManager;     //what for?
+    public static ScenesManager scenesManager;
 
     public void Awake()
     {
         Time.timeScale = 0f;
-        MainMenu();      //shows mainmenu
+        MainMenu();
     }
 
     public void Start()
@@ -37,32 +28,31 @@ public class UIManager : MonoBehaviour
         scenesManager = FindAnyObjectByType<ScenesManager>();
     }
 
-    public void OnDestroy()
+    public void OnDestroy()     //What should go in this, What should go in DontDestroyOnLoad
     {
         MainMenu();
         ToMovementMenu();
     }
 
-    public void MainMenu()                  //Enable CanvasMainMenu & Player(s) button
+    public void MainMenu()
     {
         _canvasMainMenu.SetActive(true);
     }
 
-    public void ToMovementMenu()            //This action is set in the OnClick, attached to previous button //TODO: Include a "back and forth-button"
+    public void ToMovementMenu()            //TODO: Include a "back and forth-button"
     {
         _canvasMainMenu.SetActive(false);
         _canvasMovementMenu.SetActive(true);
     }
 
-    public void OnPlayButtonClick()         /* This action starts the game by setting the timescale and enables GameUI
-                                             * However, this way, you won't be able to keep track on runtime or lapcount? */
+    public void OnPlayButtonClick()
     {
         _canvasMovementMenu.SetActive(false);
         _canvasGameUI.SetActive(true);
         Time.timeScale = 1.0f;
     }
 
-    public void PauseMenu()                 //gameObject.GetComponent<CanvasAttribute>().enabled = true;    https://www.youtube.com/watch?v=Z3tO8FPCM_w
+    public void PauseMenu()
     {
         Time.timeScale = 0f;
         _canvasGameUI.SetActive(false);     //To Disable LapDisplay when paused, neccessary? Guess it's a preferance.

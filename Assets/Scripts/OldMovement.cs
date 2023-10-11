@@ -1,64 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
 
 public class OldMovement : MonoBehaviour
 {
     //[SerializeField] InputAction moveAction;  Sebastians suggestion, where you'll have to bind each key
     //[SerializeField] InputAction turnAction;
 
-    
-    public static UIManager _uiManager;
+    public static UIManager uiManager;
+    public Rigidbody carRb;
 
     private float speed = 10f;
     private float turnSpeed = 0.5f;
     private float driftSpeed = 3f;
     
-
     private float thrust;
     private float turn;
     private float drift;
     private bool isDrifting = false;
-    private float _pause = 1.0f;
-
-    public Rigidbody oldCarRb;
+    private float pause = 1.0f;
 
     void Start()
     {
-        oldCarRb = GetComponent<Rigidbody>();
-        _uiManager = FindAnyObjectByType<UIManager>();      //To find UIManager
+        carRb = GetComponent<Rigidbody>();
+        uiManager = FindAnyObjectByType<UIManager>();       //To manage the Pause Menu below
     }
 
     void FixedUpdate()
     {
-        Thrust(thrust * Time.fixedDeltaTime); // is this neccessary?
+        Thrust(thrust * Time.fixedDeltaTime);       // is this * Time.fixedDeltaTime neccessary?
         Turn(turn * Time.fixedDeltaTime);
     }
 
     public void OnThrust(InputAction.CallbackContext context)
     {
         thrust = context.ReadValue<float>();
-        //Debug.Log(m_thrust);
+        //Debug.Log(thrust);
     }
 
-    public void Thrust(float m_thrust)
+    public void Thrust(float _thrust)       /* This comes with disadvantages. You can't, in an easy and natural way, transform the car backwards when collision-bumb
+                                             * Backspeed == Forward speed
+                                             * When speed boost, only in forward direction
+                                             */
     {
-        if(m_thrust > 0) //hardcoded from the value that the player input gives. Is this ok?
+        if(_thrust > 0)        //hardcoded from the value that the player input gives. Is this ok? There should be a way around it!
         {
-            oldCarRb.AddForce(transform.forward * speed);   
-            /*
-             * This comes with disadvantages. They are: 
-             * You can't, in an easy and natural way, transform the car backwards when collision-bumb 
-             * ...
-             */
+            carRb.AddForce(transform.forward * speed);      
         }
-        else if(m_thrust < 0)
+        else if(_thrust < 0)
         {
-            oldCarRb.AddForce(-transform.forward * speed);
+            carRb.AddForce(-transform.forward * speed);
         }
     }
 
@@ -68,24 +58,22 @@ public class OldMovement : MonoBehaviour
         //Debug.Log(turn);
     }
 
-    public void Turn(float m_turn)
+    public void Turn(float _turn)
     {
-        //Normal Turn
-        if(m_turn > 0)
+        if(_turn > 0)        //Normal Turn
         {
             transform.Rotate(Vector3.up, turnSpeed);
         }
-        else if(m_turn < 0)
+        else if(_turn < 0)
         {
             transform.Rotate(Vector3.up, -turnSpeed);
         }
         
-        //Drifting Turn
-        if(m_turn > 0 && isDrifting == true)
+        if(_turn > 0 && isDrifting == true)     //Drifting Turn
         {
             transform.Rotate(Vector3.up, turnSpeed * driftSpeed);
         }
-        else if (m_turn < 0 && isDrifting == true)
+        else if (_turn < 0 && isDrifting == true)
         {
             transform.Rotate(Vector3.up, -turnSpeed * driftSpeed);
         }
@@ -106,14 +94,14 @@ public class OldMovement : MonoBehaviour
         //Debug.Log(isDrifting);
     }
 
-    public void Pause(InputAction.CallbackContext context)      //https://www.youtube.com/watch?v=9dYDBomQpBQ tip on pausemenu
-    {                                                           /* This Mehmet helped me fix by NOt checkinf for the 0 value, 
+    public void Pause(InputAction.CallbackContext context)      /* This Mehmet helped me with by not checkinf for the 0 value, 
                                                                  * and by resuming the pause in the same way that the UI buttons work
                                                                  * TODO: When pausing and resuming more than once, the resumebutton don't reset as it should */
-        _pause = context.ReadValue<float>();                    
-        if (_pause == 1)
+    {                                                           
+        pause = context.ReadValue<float>();                    
+        if (pause == 1)
         {
-            _uiManager.PauseMenu();
+            uiManager.PauseMenu();
             Debug.Log("Game Paused");
         }
     }
