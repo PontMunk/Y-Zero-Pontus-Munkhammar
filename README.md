@@ -171,7 +171,7 @@ Bad stuff:
 
 I'm disappointed towards my ability to adapt my code towards generic structures. As of my understanding, this is not super easy to create, but the time that it takes to learn this was beyond my expectation.
 I may be criticising my "beginners code" a bit to much as well, but when the enthusiasm is there to learn something, and you find out that you just don't understand right now... that's stressful.
-Try structuring even more! Make time to find out what you're going to need to learn, and how to, before entering a stage where you end up dependent on your current 
+Copy pasta in the scenes. Do make a game atleast that generic, so that you can instantiate the right stuff in the right time. This is crucial for the time to come!
 
 
 Things to improve:
@@ -179,6 +179,8 @@ Things to improve:
 To unlock a way of thinking by introduce more functionality in unity. This was a great example where I lack knowledge and a wake up call over the great amount of things that is out there.
 Move one step at a time. Review and rewind to get the understandings of how tings work properly.
 Get more familiar with all the different terms used in programming and make yourself a map/library to keep track of the things that I "know", "can improve" and "don't know yet".
+Try structuring even more! Make time to find out what you're going to need to learn, and how to, before entering a stage where you have no idea what to do. AND if you do, try to eevaluate how much time it'll take to learn the things that's needs to be done.
+Get started on a library of these things.
  
 
 "Note to self: In the future, I'd rather handle these kinds of text in Word and just assign the basic functions in the README"
